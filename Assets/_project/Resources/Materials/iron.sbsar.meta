@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: e686b80d9878e554387dff1735ae44d6
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: dda12f74ff9116a42b23482252b2c482, type: 3}
+  _instancesCopy:
+  - {fileID: 11400000, guid: b5c5bc072edc75c47b76353fad7986af, type: 2}
+  _fileAsset: {instanceID: 0}
+  _assetPath: Assets/_project/Materials/iron.sbsar

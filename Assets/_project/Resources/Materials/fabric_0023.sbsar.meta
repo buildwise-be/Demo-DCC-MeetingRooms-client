@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: e5bff460970f53d47b07782f4c99fca4
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: dda12f74ff9116a42b23482252b2c482, type: 3}
+  _instancesCopy:
+  - {fileID: 11400000, guid: f4132cbd91c72af418c23ae855af073b, type: 2}
+  _fileAsset: {instanceID: 0}
+  _assetPath: Assets/_project/Materials/fabric_0023.sbsar

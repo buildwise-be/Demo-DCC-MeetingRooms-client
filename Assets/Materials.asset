@@ -1,0 +1,290 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34acb6faa25ad2e449371f4f9f7e498c, type: 3}
+  m_Name: Materials
+  m_EditorClassIdentifier: 
+  rules:
+  - isCollapsed: 1
+    isEnabled: 1
+    name: c0c0c0ff
+    blocks:
+    - isEnabled: 1
+      actionId: 681870622
+      serializedNames: []
+      serializedValues: []
+      serializedHash:
+        serializedVersion: 2
+        Hash: 3768462df9194a1445b81f68f46fa75d
+    - isEnabled: 1
+      actionId: 156420455
+      serializedNames:
+      - caseSensitive
+      - valueConstrain
+      - value
+      serializedValues:
+      - False
+      - 0
+      - c0c0c0ff
+      serializedHash:
+        serializedVersion: 2
+        Hash: f154e5ca9740db1f5ab78edba7250211
+    - isEnabled: 1
+      actionId: 155767537
+      serializedNames:
+      - material
+      serializedValues:
+      - 023166983042d9744983c50b7a78793e|Assets/_project/Resources/Materials/Basic/White.mat
+      serializedHash:
+        serializedVersion: 2
+        Hash: d4247e80e80d1af98f4b98b262b81292
+  - isCollapsed: 1
+    isEnabled: 1
+    name: f8f8f8ff
+    blocks:
+    - isEnabled: 1
+      actionId: 681870622
+      serializedNames: []
+      serializedValues: []
+      serializedHash:
+        serializedVersion: 2
+        Hash: 3768462df9194a1445b81f68f46fa75d
+    - isEnabled: 1
+      actionId: 156420455
+      serializedNames:
+      - caseSensitive
+      - valueConstrain
+      - value
+      serializedValues:
+      - False
+      - 0
+      - f8f8f8ff
+      serializedHash:
+        serializedVersion: 2
+        Hash: f14aaf2bc4908eed93691259d13148e5
+    - isEnabled: 1
+      actionId: 155767537
+      serializedNames:
+      - material
+      serializedValues:
+      - 023166983042d9744983c50b7a78793e|Assets/_project/Resources/Materials/Basic/White.mat
+      serializedHash:
+        serializedVersion: 2
+        Hash: d4247e80e80d1af98f4b98b262b81292
+  - isCollapsed: 1
+    isEnabled: 1
+    name: ffffffff
+    blocks:
+    - isEnabled: 1
+      actionId: 681870622
+      serializedNames: []
+      serializedValues: []
+      serializedHash:
+        serializedVersion: 2
+        Hash: 3768462df9194a1445b81f68f46fa75d
+    - isEnabled: 1
+      actionId: 156420455
+      serializedNames:
+      - caseSensitive
+      - valueConstrain
+      - value
+      serializedValues:
+      - False
+      - 0
+      - ffffffff
+      serializedHash:
+        serializedVersion: 2
+        Hash: ec0a3b4c462a946699a2e21f7a2ee3a2
+    - isEnabled: 1
+      actionId: 155767537
+      serializedNames:
+      - material
+      serializedValues:
+      - 023166983042d9744983c50b7a78793e|Assets/_project/Resources/Materials/Basic/White.mat
+      serializedHash:
+        serializedVersion: 2
+        Hash: d4247e80e80d1af98f4b98b262b81292
+  - isCollapsed: 0
+    isEnabled: 1
+    name: White
+    blocks:
+    - isEnabled: 1
+      actionId: 681870622
+      serializedNames: []
+      serializedValues: []
+      serializedHash:
+        serializedVersion: 2
+        Hash: 3768462df9194a1445b81f68f46fa75d
+    - isEnabled: 1
+      actionId: 155767537
+      serializedNames:
+      - material
+      serializedValues:
+      - 023166983042d9744983c50b7a78793e|Assets/_project/Resources/Materials/Basic/White.mat
+      serializedHash:
+        serializedVersion: 2
+        Hash: d4247e80e80d1af98f4b98b262b81292
+  - isCollapsed: 0
+    isEnabled: 1
+    name: Glass
+    blocks:
+    - isEnabled: 1
+      actionId: 681870622
+      serializedNames: []
+      serializedValues: []
+      serializedHash:
+        serializedVersion: 2
+        Hash: 3768462df9194a1445b81f68f46fa75d
+    - isEnabled: 1
+      actionId: 523752222
+      serializedNames:
+      - caseSensitive
+      - propertyName.constrain
+      - propertyName.value
+      - propertyName
+      - propertyValue.constrain
+      - propertyValue.value
+      - propertyValue
+      serializedValues:
+      - False
+      - 0
+      - material/name
+      - 2
+      - 0
+      - glas
+      - 2
+      serializedHash:
+        serializedVersion: 2
+        Hash: a9adf95541d62e427ecff2f677cd581a
+    - isEnabled: 1
+      actionId: 925546315
+      serializedNames:
+      - recursive
+      - keepParentsInSelection
+      serializedValues:
+      - True
+      - False
+      serializedHash:
+        serializedVersion: 2
+        Hash: 9e1d1ac1b70c56aea1b8413a66aebda4
+    - isEnabled: 1
+      actionId: 155767537
+      serializedNames:
+      - material
+      serializedValues:
+      - 4998d8a285beaa44a88ec5963eb82809|Assets/_project/Resources/Materials/Basic/Glass.mat
+      serializedHash:
+        serializedVersion: 2
+        Hash: 4054eda1f163948214de6d47b353a61d
+  - isCollapsed: 0
+    isEnabled: 1
+    name: Bamboo
+    blocks:
+    - isEnabled: 1
+      actionId: 681870622
+      serializedNames: []
+      serializedValues: []
+      serializedHash:
+        serializedVersion: 2
+        Hash: 3768462df9194a1445b81f68f46fa75d
+    - isEnabled: 1
+      actionId: 523752222
+      serializedNames:
+      - caseSensitive
+      - propertyName.constrain
+      - propertyName.value
+      - propertyName
+      - propertyValue.constrain
+      - propertyValue.value
+      - propertyValue
+      serializedValues:
+      - False
+      - 0
+      - material/name
+      - 2
+      - 0
+      - bamboe
+      - 2
+      serializedHash:
+        serializedVersion: 2
+        Hash: a9adf95541d62e427ecff2f677cd581a
+    - isEnabled: 1
+      actionId: 925546315
+      serializedNames:
+      - recursive
+      - keepParentsInSelection
+      serializedValues:
+      - True
+      - False
+      serializedHash:
+        serializedVersion: 2
+        Hash: 9e1d1ac1b70c56aea1b8413a66aebda4
+    - isEnabled: 1
+      actionId: 155767537
+      serializedNames:
+      - material
+      serializedValues:
+      - 29b377bccc72ed141ba4e6ddcf74d4a4|Assets/_project/Resources/Materials/bamboo_graph_0/bamboo_graph_0_material.mat
+      serializedHash:
+        serializedVersion: 2
+        Hash: 5b2bbe0e09761a78a7a3fb2da2bbf16f
+  - isCollapsed: 0
+    isEnabled: 1
+    name: Tapijt
+    blocks:
+    - isEnabled: 1
+      actionId: 681870622
+      serializedNames: []
+      serializedValues: []
+      serializedHash:
+        serializedVersion: 2
+        Hash: 3768462df9194a1445b81f68f46fa75d
+    - isEnabled: 1
+      actionId: 523752222
+      serializedNames:
+      - caseSensitive
+      - propertyName.constrain
+      - propertyName.value
+      - propertyName
+      - propertyValue.constrain
+      - propertyValue.value
+      - propertyValue
+      serializedValues:
+      - False
+      - 0
+      - MATERIAL/Name
+      - 2
+      - 0
+      - Tapijttegels
+      - 2
+      serializedHash:
+        serializedVersion: 2
+        Hash: a9adf95541d62e427ecff2f677cd581a
+    - isEnabled: 1
+      actionId: 925546315
+      serializedNames:
+      - recursive
+      - keepParentsInSelection
+      serializedValues:
+      - True
+      - False
+      serializedHash:
+        serializedVersion: 2
+        Hash: 9e1d1ac1b70c56aea1b8413a66aebda4
+    - isEnabled: 1
+      actionId: 155767537
+      serializedNames:
+      - material
+      serializedValues:
+      - 1bef9392efaf41341a02fa2775fa7989|Assets/_project/Resources/Materials/fabric_0023_graph_0/fabric_0023_graph_0_material.mat
+      serializedHash:
+        serializedVersion: 2
+        Hash: 48a0eef366a3d7ca4b7bddeaf8bde4c7

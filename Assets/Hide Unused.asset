@@ -1,0 +1,268 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34acb6faa25ad2e449371f4f9f7e498c, type: 3}
+  m_Name: Hide Unused
+  m_EditorClassIdentifier: 
+  rules:
+  - isCollapsed: 1
+    isEnabled: 1
+    name: Geen
+    blocks:
+    - isEnabled: 1
+      actionId: 681870622
+      serializedNames: []
+      serializedValues: []
+      serializedHash:
+        serializedVersion: 2
+        Hash: 3768462df9194a1445b81f68f46fa75d
+    - isEnabled: 1
+      actionId: 523752222
+      serializedNames:
+      - caseSensitive
+      - propertyName.constrain
+      - propertyName.value
+      - propertyName
+      - propertyValue.constrain
+      - propertyValue.value
+      - propertyValue
+      serializedValues:
+      - False
+      - 0
+      - ifcbuildingelementproxytype/name
+      - 2
+      - 0
+      - xx_geen
+      - 2
+      serializedHash:
+        serializedVersion: 2
+        Hash: a9adf95541d62e427ecff2f677cd581a
+    - isEnabled: 1
+      actionId: 975614871
+      serializedNames:
+      - activeOnOff
+      serializedValues:
+      - False
+      serializedHash:
+        serializedVersion: 2
+        Hash: f397f75d672f7c97bd2011f948b40648
+  - isCollapsed: 1
+    isEnabled: 1
+    name: Omgeving
+    blocks:
+    - isEnabled: 1
+      actionId: 783075375
+      serializedNames:
+      - caseSensitive
+      - valueConstrain
+      - value
+      serializedValues:
+      - False
+      - 0
+      - omgeving
+      serializedHash:
+        serializedVersion: 2
+        Hash: 1777c50a2620c5fcd6c926e4ba04c147
+    - isEnabled: 1
+      actionId: 975614871
+      serializedNames:
+      - activeOnOff
+      serializedValues:
+      - False
+      serializedHash:
+        serializedVersion: 2
+        Hash: f397f75d672f7c97bd2011f948b40648
+  - isCollapsed: 0
+    isEnabled: 1
+    name: Putdeksel
+    blocks:
+    - isEnabled: 1
+      actionId: 681870622
+      serializedNames: []
+      serializedValues: []
+      serializedHash:
+        serializedVersion: 2
+        Hash: 3768462df9194a1445b81f68f46fa75d
+    - isEnabled: 1
+      actionId: 783075375
+      serializedNames:
+      - caseSensitive
+      - valueConstrain
+      - value
+      serializedValues:
+      - False
+      - 0
+      - putdeksel
+      serializedHash:
+        serializedVersion: 2
+        Hash: ce354ddf5fbd974e88fc3de88017c92c
+    - isEnabled: 1
+      actionId: 975614871
+      serializedNames:
+      - activeOnOff
+      serializedValues:
+      - False
+      serializedHash:
+        serializedVersion: 2
+        Hash: f397f75d672f7c97bd2011f948b40648
+  - isCollapsed: 1
+    isEnabled: 1
+    name: Haag
+    blocks:
+    - isEnabled: 1
+      actionId: 681870622
+      serializedNames: []
+      serializedValues: []
+      serializedHash:
+        serializedVersion: 2
+        Hash: 3768462df9194a1445b81f68f46fa75d
+    - isEnabled: 1
+      actionId: 783075375
+      serializedNames:
+      - caseSensitive
+      - valueConstrain
+      - value
+      serializedValues:
+      - False
+      - 0
+      - haag
+      serializedHash:
+        serializedVersion: 2
+        Hash: ab91a590dadf0068439e7c7c2623f960
+    - isEnabled: 1
+      actionId: 975614871
+      serializedNames:
+      - activeOnOff
+      serializedValues:
+      - False
+      serializedHash:
+        serializedVersion: 2
+        Hash: f397f75d672f7c97bd2011f948b40648
+  - isCollapsed: 1
+    isEnabled: 1
+    name: BinnenVerduisting
+    blocks:
+    - isEnabled: 1
+      actionId: 681870622
+      serializedNames: []
+      serializedValues: []
+      serializedHash:
+        serializedVersion: 2
+        Hash: 3768462df9194a1445b81f68f46fa75d
+    - isEnabled: 1
+      actionId: 783075375
+      serializedNames:
+      - caseSensitive
+      - valueConstrain
+      - value
+      serializedValues:
+      - False
+      - 0
+      - binnenverduistering
+      serializedHash:
+        serializedVersion: 2
+        Hash: 3841c965c7cfb09b94552cdcdfad96d2
+    - isEnabled: 1
+      actionId: 975614871
+      serializedNames:
+      - activeOnOff
+      serializedValues:
+      - False
+      serializedHash:
+        serializedVersion: 2
+        Hash: f397f75d672f7c97bd2011f948b40648
+  - isCollapsed: 1
+    isEnabled: 1
+    name: Ceilings
+    blocks:
+    - isEnabled: 1
+      actionId: 681870622
+      serializedNames: []
+      serializedValues: []
+      serializedHash:
+        serializedVersion: 2
+        Hash: 3768462df9194a1445b81f68f46fa75d
+    - isEnabled: 1
+      actionId: 783075375
+      serializedNames:
+      - caseSensitive
+      - valueConstrain
+      - value
+      serializedValues:
+      - False
+      - 0
+      - ceiling
+      serializedHash:
+        serializedVersion: 2
+        Hash: b459de97c399ab133f6c4c85d03e7dbf
+    - isEnabled: 1
+      actionId: 523752222
+      serializedNames:
+      - caseSensitive
+      - propertyName.constrain
+      - propertyName.value
+      - propertyName
+      - propertyValue.constrain
+      - propertyValue.value
+      - propertyValue
+      serializedValues:
+      - False
+      - 0
+      - constraints/level
+      - 2
+      - 0
+      - 'Level: 000'
+      - 2
+      serializedHash:
+        serializedVersion: 2
+        Hash: a9adf95541d62e427ecff2f677cd581a
+    - isEnabled: 1
+      actionId: 975614871
+      serializedNames:
+      - activeOnOff
+      serializedValues:
+      - False
+      serializedHash:
+        serializedVersion: 2
+        Hash: f397f75d672f7c97bd2011f948b40648
+  - isCollapsed: 0
+    isEnabled: 1
+    name: Omgeving
+    blocks:
+    - isEnabled: 1
+      actionId: 681870622
+      serializedNames: []
+      serializedValues: []
+      serializedHash:
+        serializedVersion: 2
+        Hash: 3768462df9194a1445b81f68f46fa75d
+    - isEnabled: 1
+      actionId: 783075375
+      serializedNames:
+      - caseSensitive
+      - valueConstrain
+      - value
+      serializedValues:
+      - False
+      - 0
+      - omgeving
+      serializedHash:
+        serializedVersion: 2
+        Hash: 1777c50a2620c5fcd6c926e4ba04c147
+    - isEnabled: 1
+      actionId: 975614871
+      serializedNames:
+      - activeOnOff
+      serializedValues:
+      - False
+      serializedHash:
+        serializedVersion: 2
+        Hash: f397f75d672f7c97bd2011f948b40648

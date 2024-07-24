@@ -1,0 +1,260 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34acb6faa25ad2e449371f4f9f7e498c, type: 3}
+  m_Name: Static
+  m_EditorClassIdentifier: 
+  rules:
+  - isCollapsed: 1
+    isEnabled: 1
+    name: Fabric
+    blocks:
+    - isEnabled: 1
+      actionId: 681870622
+      serializedNames: []
+      serializedValues: []
+      serializedHash:
+        serializedVersion: 2
+        Hash: 3768462df9194a1445b81f68f46fa75d
+    - isEnabled: 1
+      actionId: 156420455
+      serializedNames:
+      - caseSensitive
+      - valueConstrain
+      - value
+      serializedValues:
+      - False
+      - 0
+      - fabric_0023
+      serializedHash:
+        serializedVersion: 2
+        Hash: 32781ba36db64accaad88b5090725434
+    - isEnabled: 1
+      actionId: 415461000
+      serializedNames:
+      - isStatic
+      serializedValues:
+      - True
+      serializedHash:
+        serializedVersion: 2
+        Hash: df8d3d827c1a124fe521be4c43f1c2b1
+  - isCollapsed: 1
+    isEnabled: 1
+    name: Bamboo
+    blocks:
+    - isEnabled: 1
+      actionId: 681870622
+      serializedNames: []
+      serializedValues: []
+      serializedHash:
+        serializedVersion: 2
+        Hash: 3768462df9194a1445b81f68f46fa75d
+    - isEnabled: 1
+      actionId: 156420455
+      serializedNames:
+      - caseSensitive
+      - valueConstrain
+      - value
+      serializedValues:
+      - False
+      - 0
+      - bamboo_graph
+      serializedHash:
+        serializedVersion: 2
+        Hash: 021668a5630a9c59a4d349b6ea7dda70
+    - isEnabled: 1
+      actionId: 415461000
+      serializedNames:
+      - isStatic
+      serializedValues:
+      - True
+      serializedHash:
+        serializedVersion: 2
+        Hash: df8d3d827c1a124fe521be4c43f1c2b1
+  - isCollapsed: 1
+    isEnabled: 1
+    name: IFCSTANDARDWALLCASE
+    blocks:
+    - isEnabled: 1
+      actionId: 681870622
+      serializedNames: []
+      serializedValues: []
+      serializedHash:
+        serializedVersion: 2
+        Hash: 3768462df9194a1445b81f68f46fa75d
+    - isEnabled: 1
+      actionId: 523752222
+      serializedNames:
+      - caseSensitive
+      - propertyName.constrain
+      - propertyName.value
+      - propertyName
+      - propertyValue.constrain
+      - propertyValue.value
+      - propertyValue
+      serializedValues:
+      - False
+      - 0
+      - type
+      - 2
+      - 0
+      - ifcwallstandardcase
+      - 2
+      serializedHash:
+        serializedVersion: 2
+        Hash: a9adf95541d62e427ecff2f677cd581a
+    - isEnabled: 1
+      actionId: 925546315
+      serializedNames:
+      - recursive
+      - keepParentsInSelection
+      serializedValues:
+      - True
+      - False
+      serializedHash:
+        serializedVersion: 2
+        Hash: 9e1d1ac1b70c56aea1b8413a66aebda4
+    - isEnabled: 1
+      actionId: 783075375
+      serializedNames:
+      - caseSensitive
+      - valueConstrain
+      - value
+      serializedValues:
+      - False
+      - 0
+      - mesh
+      serializedHash:
+        serializedVersion: 2
+        Hash: 0f1b45f025e522a771a8dc25797ddceb
+    - isEnabled: 1
+      actionId: 415461000
+      serializedNames:
+      - isStatic
+      serializedValues:
+      - True
+      serializedHash:
+        serializedVersion: 2
+        Hash: df8d3d827c1a124fe521be4c43f1c2b1
+  - isCollapsed: 1
+    isEnabled: 1
+    name: Linea Paneel
+    blocks:
+    - isEnabled: 1
+      actionId: 681870622
+      serializedNames: []
+      serializedValues: []
+      serializedHash:
+        serializedVersion: 2
+        Hash: 3768462df9194a1445b81f68f46fa75d
+    - isEnabled: 1
+      actionId: 783075375
+      serializedNames:
+      - caseSensitive
+      - valueConstrain
+      - value
+      serializedValues:
+      - False
+      - 0
+      - linea paneel
+      serializedHash:
+        serializedVersion: 2
+        Hash: 27f07d5c7fcc55f1dc91d4f5431d2bee
+    - isEnabled: 1
+      actionId: 925546315
+      serializedNames:
+      - recursive
+      - keepParentsInSelection
+      serializedValues:
+      - True
+      - False
+      serializedHash:
+        serializedVersion: 2
+        Hash: 9e1d1ac1b70c56aea1b8413a66aebda4
+    - isEnabled: 1
+      actionId: 156420455
+      serializedNames:
+      - caseSensitive
+      - valueConstrain
+      - value
+      serializedValues:
+      - False
+      - 0
+      - glass
+      serializedHash:
+        serializedVersion: 2
+        Hash: 6ce33a2b47c55dc530fd52ed30e6cc69
+    - isEnabled: 1
+      actionId: 415461000
+      serializedNames:
+      - isStatic
+      serializedValues:
+      - True
+      serializedHash:
+        serializedVersion: 2
+        Hash: df8d3d827c1a124fe521be4c43f1c2b1
+  - isCollapsed: 0
+    isEnabled: 1
+    name: IFCWALL
+    blocks:
+    - isEnabled: 1
+      actionId: 681870622
+      serializedNames: []
+      serializedValues: []
+      serializedHash:
+        serializedVersion: 2
+        Hash: 3768462df9194a1445b81f68f46fa75d
+    - isEnabled: 1
+      actionId: 783075375
+      serializedNames:
+      - caseSensitive
+      - valueConstrain
+      - value
+      serializedValues:
+      - False
+      - 0
+      - IFCWALL
+      serializedHash:
+        serializedVersion: 2
+        Hash: cc3d12d6dc3668c6570a64b7757024c9
+    - isEnabled: 1
+      actionId: 925546315
+      serializedNames:
+      - recursive
+      - keepParentsInSelection
+      serializedValues:
+      - True
+      - False
+      serializedHash:
+        serializedVersion: 2
+        Hash: 9e1d1ac1b70c56aea1b8413a66aebda4
+    - isEnabled: 1
+      actionId: 783075375
+      serializedNames:
+      - caseSensitive
+      - valueConstrain
+      - value
+      serializedValues:
+      - False
+      - 0
+      - Mesh
+      serializedHash:
+        serializedVersion: 2
+        Hash: 8dc16d79d34857c4c0d5880867052f2d
+    - isEnabled: 1
+      actionId: 415461000
+      serializedNames:
+      - isStatic
+      serializedValues:
+      - True
+      serializedHash:
+        serializedVersion: 2
+        Hash: df8d3d827c1a124fe521be4c43f1c2b1
