@@ -51,7 +51,7 @@ public class CameraManager : MonoBehaviour
 
     private IEnumerator ChangeCameraFocusCoroutine(int roomNumber)
     {
-        _meetingRooms = _meetingRoomsManager.meetingRooms;
+        _meetingRooms = _meetingRoomsManager.meetingRoomsInScene;
         if (_meetingRooms == null) { yield break; }
         if (roomNumber == 0)
         {
@@ -87,7 +87,7 @@ public class CameraManager : MonoBehaviour
         */
         Debug.Log("\n\n");
         Debug.Log("Changing camera focus to room " + roomNumber);
-        _meetingRooms = _meetingRoomsManager.meetingRooms;
+        _meetingRooms = _meetingRoomsManager.meetingRoomsInScene;
         if (_meetingRooms == null) { return; }
         if (roomNumber == 0)
         {

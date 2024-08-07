@@ -9,11 +9,14 @@ public class MeetingRoomVisualsHandler : MonoBehaviour, IMeetingRoomVisualsHandl
     private Material _unFocusedMaterial;
     private Material _occupancyMaterial;
 
+    private MeetingRoomsManager _meetingRoomsManager;
+
     private void Awake()
     {
         _focusedMaterial = Resources.Load<Material>("Materials/Rooms/RoomFocusedMaterial");
         _unFocusedMaterial = Resources.Load<Material>("Materials/Rooms/RoomUnfocusedMaterial");
         _occupancyMaterial = Resources.Load<Material>("Materials/Rooms/RoomOccupancyMaterial");
+        _meetingRoomsManager = FindObjectOfType<MeetingRoomsManager>();
     }
     public void SetFocusedVisuals()
     {
@@ -37,6 +40,7 @@ public class MeetingRoomVisualsHandler : MonoBehaviour, IMeetingRoomVisualsHandl
         _meetingRoom.GetComponent<MeshRenderer>().material = _unFocusedMaterial;
     }
 
+    /*
     public void SetOccupancyVisuals()
     {
         if (_occupancyMaterial == null)
@@ -61,6 +65,8 @@ public class MeetingRoomVisualsHandler : MonoBehaviour, IMeetingRoomVisualsHandl
         Color transparentC = new Color(c.r, c.g, c.b, 0.3f);
         _meshRenderer.material.color = transparentC;
     }
+    */
+    
 
     public void SetNumberOfMeetingsVisuals()
     {
@@ -74,14 +80,14 @@ public class MeetingRoomVisualsHandler : MonoBehaviour, IMeetingRoomVisualsHandl
         _meshRenderer.material = _occupancyMaterial;
 
         Color c;
-        if (_meetingRoom.meetingsPerDay == -1)
+        if (_meetingRoom.MeetingsPerDay == 0)
         {
             Debug.LogWarning("No data fetched for room occupancy");
             c = Color.grey;
         }
         else
         {
-            c = Color.Lerp(Color.green, Color.red, _meetingRoom.meetingsPerDay/10.0f); // TODO: Change 10.0f by looking the min max values of meetings per day
+            c = Color.Lerp(Color.green, Color.red, _meetingRoom.MeetingsPerDay/ _meetingRoomsManager.MaxMeetingsPerDay);
         }
         Color transparentC = new Color(c.r, c.g, c.b, 0.3f);
         _meshRenderer.material.color = transparentC;

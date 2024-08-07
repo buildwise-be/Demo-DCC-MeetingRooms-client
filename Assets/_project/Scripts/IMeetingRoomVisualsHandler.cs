@@ -2,6 +2,6 @@
 {
     void SetFocusedVisuals();
     void SetUnFocusedVisuals();
-    void SetOccupancyVisuals();
+    //void SetOccupancyVisuals();
     void SetNumberOfMeetingsVisuals();
 }
