@@ -62,29 +62,26 @@ public class DatabaseConnector : MonoBehaviour
         // Iterate the <see cref="Pageable"> to access all queried entities.
         foreach (TableEntity qEntity in queryResultsFilter)
         {
-            Debug.Log($"{qEntity.GetString("room")}: {qEntity.GetDateTimeOffset("start_time")}");
-
+            int? roomToParse = qEntity.GetInt32("room");
+            int room = roomToParse ?? 0;
             if (
                 meetingRoomData.Any(
-                    (data) => data.RoomNumber == int.Parse(qEntity.GetString("room"))
-                )
+                    (data) => data.RoomNumber == room)
             )
             {
                 meetingRoomData
-                    .Find((data) => data.RoomNumber == int.Parse(qEntity.GetString("room")))
+                    .Find((data) => data.RoomNumber == room)
                     .StartTimes.Add(qEntity.GetDateTimeOffset("start_time"));
                 meetingRoomData
-                    .Find((data) => data.RoomNumber == int.Parse(qEntity.GetString("room")))
+                    .Find((data) => data.RoomNumber == room)
                     .Organizers.Add(qEntity.GetString("organizer"));
                 meetingRoomData
-                    .Find((data) => data.RoomNumber == int.Parse(qEntity.GetString("room")))
+                    .Find((data) => data.RoomNumber == room)
                     .Titles.Add(qEntity.GetString("title"));
             }
             else
             {
-                MeetingRoomData roomData = new MeetingRoomData(
-                    int.Parse(qEntity.GetString("room"))
-                );
+                MeetingRoomData roomData = new MeetingRoomData(room);
                 roomData.StartTimes.Add(qEntity.GetDateTimeOffset("start_time"));
                 roomData.Organizers.Add(qEntity.GetString("organizer"));
                 roomData.Titles.Add(qEntity.GetString("title"));
