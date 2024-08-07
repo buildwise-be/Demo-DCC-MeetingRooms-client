@@ -1,0 +1,6 @@
+{
+	"DatabaseSettings": {
+		"tableName": "gobrighttable",
+		"connectionString": "YOUR_CONNECTION_STRING_HERE"
+	}
+}
