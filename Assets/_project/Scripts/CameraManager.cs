@@ -19,7 +19,7 @@ public class CameraManager : MonoBehaviour
     void Start()
     {
         CinemachineCore.GetInputAxis = GetAxisOnlyIfRightMouseButtonDown;
-        _meetingRoomsManager.OnFocusRoomChanged.AddListener(ChangeCameraFocus);
+        _meetingRoomsManager.OnFocusRoomChanged.AddListener(FocusCameraOnRoom);
     }
 
     public float GetAxisOnlyIfRightMouseButtonDown(string axisName)
@@ -79,37 +79,44 @@ public class CameraManager : MonoBehaviour
         }
     }
 
-    public void ChangeCameraFocus(int roomNumber)
+    public void FocusCameraOnRoom(int roomNumber)
     {
-        /*
-        StartCoroutine(ChangeCameraFocusCoroutine(roomNumber));
-        return;
-        */
-        Debug.Log("\n\n");
-        Debug.Log("Changing camera focus to room " + roomNumber);
         _meetingRooms = _meetingRoomsManager.meetingRoomsInScene;
         if (_meetingRooms == null) { return; }
         if (roomNumber == 0)
         {
-            Debug.Log($"Virtual camera position before change is {_virtualCamera.transform.position}");
             _virtualCamera.LookAt = _meetingRoomsManager.CenterOfAllMeetingRooms;
             _virtualCamera.Follow = _meetingRoomsManager.CenterOfAllMeetingRooms;
-            Debug.Log($"Virtual camera position after change is {_virtualCamera.transform.position}");
             var transposer = _virtualCamera.GetCinemachineComponent<CinemachineTransposer>();
             transposer.m_FollowOffset = new Vector3(0, 40, -40);
-            Debug.Log($"Virtual camera position after offset change is {_virtualCamera.transform.position}");
-            //AdjustDepthOfField(_meetingRoomsManager.CenterOfAllMeetingRooms);
         }
         else
         {
-            Debug.Log($"Virtual camera position before change is {_virtualCamera.transform.position}");
             _virtualCamera.LookAt = _meetingRooms[roomNumber - 1].transform;
             _virtualCamera.Follow = _meetingRooms[roomNumber - 1].transform;
             var transposer = _virtualCamera.GetCinemachineComponent<CinemachineTransposer>();
-            Debug.Log($"Virtual camera position after change is {_virtualCamera.transform.position}");
             transposer.m_FollowOffset = new Vector3(0, 15, -10);
-            Debug.Log($"Virtual camera position after offset change is {_virtualCamera.transform.position}");
-            //AdjustVolumeDepthOfField(_meetingRooms[roomNumber - 1].gameObject);
+        }
+    }
+
+    /// <summary>
+    /// Moves the virtual camera to focus on the given room
+    /// </summary>
+    /// <param name="room">The room on which to focus</param>
+    public void FocusCameraOnRoom(MeetingRoom room)
+    {
+        if (room.roomNumber == 0)
+        {
+            _virtualCamera.LookAt = _meetingRoomsManager.CenterOfAllMeetingRooms;
+            _virtualCamera.Follow = _meetingRoomsManager.CenterOfAllMeetingRooms;
+            var transposer = _virtualCamera.GetCinemachineComponent<CinemachineTransposer>();
+            transposer.m_FollowOffset = new Vector3(0, 40, -40);
+        }
+        else
+        {
+            _virtualCamera.LookAt = room.transform;
+            _virtualCamera.Follow = room.transform;
+            var transposer = _virtualCamera.GetCinemachineComponent<CinemachineTransposer>();
         }
     }
 
