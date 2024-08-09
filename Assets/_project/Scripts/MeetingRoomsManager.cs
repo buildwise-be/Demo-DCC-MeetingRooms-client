@@ -8,7 +8,7 @@ using UnityEngine.Events;
 public class MeetingRoomsManager : MonoBehaviour
 {
     [HideInInspector]
-    public List<MeetingRoom> meetingRoomsInScene;
+    public List<VisualMeetingRoom> meetingRoomsInScene;
 
     [SerializeField] private TMP_Dropdown _roomsDropdown;
     [SerializeField] private GameObject _meetingRoomsCenter;
@@ -17,7 +17,7 @@ public class MeetingRoomsManager : MonoBehaviour
     [SerializeField] private GameObject _meetingRoomCenterGO;
 
     [HideInInspector]
-    public UnityEvent<int> OnFocusRoomChanged;
+    public UnityEvent<VisualMeetingRoom> OnRoomSelectionInDropdown;
     [HideInInspector]
     public UnityEvent OnMeetingRoomsObtained;
 
@@ -30,17 +30,18 @@ public class MeetingRoomsManager : MonoBehaviour
     }
 
 
-    private int _currentFocusedRoom = -1;
-    public int CurrentFocusedRoom 
+    private int _currentlySelectedRoomDropDownIndex = -1;
+    public int CurrentlySelectedRoomDropDownIndex 
     {
         get
         {
-            return _currentFocusedRoom;
+            return _currentlySelectedRoomDropDownIndex;
         }
         set 
         {
-            _currentFocusedRoom = value;
-            OnFocusRoomChanged.Invoke(_currentFocusedRoom);
+            _currentlySelectedRoomDropDownIndex = value;
+            VisualMeetingRoom mr = meetingRoomsInScene.Where((room) => room.RoomNumber == (_currentlySelectedRoomDropDownIndex)).FirstOrDefault();
+            OnRoomSelectionInDropdown.Invoke(mr);
         }
     }
     
@@ -57,13 +58,13 @@ public class MeetingRoomsManager : MonoBehaviour
 
     private void Awake()
     {
-        OnFocusRoomChanged = new UnityEvent<int>();
+        OnRoomSelectionInDropdown = new UnityEvent<VisualMeetingRoom>();
         OnMeetingRoomsObtained = new UnityEvent();
     }
 
     private void Start()
     {
-        OnFocusRoomChanged.AddListener(UpdateAllRoomVisualsByFocus);
+        OnRoomSelectionInDropdown.AddListener(SetFocusedRoom);
         _databaseConnector.OnMeetingRoomsDataUpdated.AddListener(UpdateMeetingRoomsGameObjects);
 
         foreach (Transform t in transform.GetComponentsInChildren<Transform>())
@@ -72,64 +73,42 @@ public class MeetingRoomsManager : MonoBehaviour
             {
                 continue;
             }
-            t.gameObject.AddComponent<MeetingRoom>();
-            t.gameObject.AddComponent<MeetingRoomVisualsHandler>();
+            if (!t.gameObject.TryGetComponent<VisualMeetingRoom>(out VisualMeetingRoom vmr))
+            {
+                t.gameObject.AddComponent<VisualMeetingRoom>();
+            }
         }
 
-        meetingRoomsInScene = transform.GetComponentsInChildren<MeetingRoom>().ToList();
+        meetingRoomsInScene = transform.GetComponentsInChildren<VisualMeetingRoom>().ToList();
 
         OnMeetingRoomsObtained.Invoke();
         PopulateRoomsDropDown();
         PositionMeetingRoomsCenter();
-        UpdateAllRoomVisualsAsUnfocused();
+        //UpdateAllRoomVisualsAsUnfocused();
+    }
+
+    private void SetFocusedRoom(VisualMeetingRoom room)
+    {
+        foreach (VisualMeetingRoom r in meetingRoomsInScene)
+        {
+            if (r != room)
+            {
+                r.IsFocused = false;
+            }
+        }
+        room.IsFocused = true;
     }
 
     private void UpdateMeetingRoomsGameObjects(List<MeetingRoomData> meetingRoomsData)
     {
-        foreach (MeetingRoom mr_go in meetingRoomsInScene)
+        foreach (VisualMeetingRoom mr_go in meetingRoomsInScene)
         {
-            meetingRoomsData.Find((data) => data.RoomNumber == mr_go.roomNumber).UpdateMeetingRoomGameObject(mr_go);
-        }
-    }
+            var matchingRoom = meetingRoomsData.Find((data) => data.RoomNumber == mr_go.RoomNumber);
 
-    private void UpdateAllRoomVisualsByFocus(int roomNumber)
-    {
-        for (int i = 0; i < meetingRoomsInScene.Count; i++)
-        {
-            if (i == roomNumber - 1)
+            if (matchingRoom != null)
             {
-                meetingRoomsInScene[i].GetComponent<IMeetingRoomVisualsHandler>().SetFocusedVisuals();
+                matchingRoom.UpdateMeetingRoomGameObject(mr_go);
             }
-            else
-            {
-                meetingRoomsInScene[i].GetComponent<IMeetingRoomVisualsHandler>().SetUnFocusedVisuals();
-            }
-        }
-    }
-
-    private void UpdateAllRoomVisualsAsUnfocused()
-    {
-        foreach (MeetingRoom room in meetingRoomsInScene)
-        {
-            room.GetComponent<IMeetingRoomVisualsHandler>().SetUnFocusedVisuals();
-        }
-    }
-
-    /*
-    public void UpdateRoomVisualsPerOccupancy()
-    {
-        foreach (MeetingRoom room in meetingRoomsInScene)
-        {
-            room.GetComponent<IMeetingRoomVisualsHandler>().SetOccupancyVisuals();
-        }
-    }
-    */
-
-    public void UpdateRoomVisualsPerMeetingAmount()
-    {
-        foreach (MeetingRoom room in meetingRoomsInScene)
-        {
-            room.GetComponent<IMeetingRoomVisualsHandler>().SetNumberOfMeetingsVisuals();
         }
     }
 
@@ -153,16 +132,25 @@ public class MeetingRoomsManager : MonoBehaviour
     {
         _roomsDropdown.ClearOptions();
         List<string> roomNames = new List<string>();
-        roomNames.Add("Global");
         foreach (MeetingRoom room in meetingRoomsInScene)
         {
-            roomNames.Add(room.name);
+            if (room.name == "Global MR")
+            {
+                roomNames.Add("Global view");
+            }
+            else
+            {
+                roomNames.Add(room.name);
+            }
         }
         _roomsDropdown.AddOptions(roomNames);
     }
 
-    public void SetCurrentFocusedRoom(int roomNumber)
+    public void SetAverageMeetingsVisuals()
     {
-        CurrentFocusedRoom = roomNumber;
+        foreach (VisualMeetingRoom visualMeetingRoom in meetingRoomsInScene)
+        {
+            visualMeetingRoom.CurrentDataTypeShown = RoomDataTypes.MeetingsPerDay;
+        }
     }
 }

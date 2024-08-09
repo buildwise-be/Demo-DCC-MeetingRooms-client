@@ -6,7 +6,10 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public class MeetingRoom : MonoBehaviour
 {
-    public int roomNumber;
+    /// <summary>
+    /// The Meeting Room number, starting at 1.
+    /// </summary>
+    public int RoomNumber;
 
     /// <summary>
     /// The average number of meetings held in the room per day, between DateStartFilter and DateEndFilter included.

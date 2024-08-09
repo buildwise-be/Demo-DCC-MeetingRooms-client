@@ -30,7 +30,7 @@ public class UIManager : MonoBehaviour
     public void ShowHoverUI(MeetingRoom room)
     {
         PlaceHoverUI(room);
-        _title.text = "Meeting Room " + room.roomNumber;
+        _title.text = "Meeting Room " + room.RoomNumber;
         _number.text = room.MeetingsPerDay.ToString("F2");
         _text.text = "Average meetings per day";
         _hoverUI.gameObject.SetActive(true);

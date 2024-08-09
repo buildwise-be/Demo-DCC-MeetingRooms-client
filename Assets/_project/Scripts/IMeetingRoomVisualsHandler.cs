@@ -1,7 +1,5 @@
 ﻿public interface IMeetingRoomVisualsHandler
 {
-    void SetFocusedVisuals();
-    void SetUnFocusedVisuals();
-    //void SetOccupancyVisuals();
-    void SetNumberOfMeetingsVisuals();
+    public bool IsFocused { get; set; }
+    public RoomDataTypes CurrentDataTypeShown { get; set; }
 }
