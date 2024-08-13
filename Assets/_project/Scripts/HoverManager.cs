@@ -9,7 +9,8 @@ public class HoverManager : MonoBehaviour
     public float raycastDistance = 100f; // Max distance for raycast
 
     [SerializeField]
-    private UIManager _uiManager;
+    private GameObject _uiManagerGameObject;
+    private IUIManager _uiManager;
     [SerializeField]
     private CameraManager _cameraManager;
     [SerializeField]
@@ -22,6 +23,7 @@ public class HoverManager : MonoBehaviour
 
     void Start()
     {
+        _uiManager = _uiManagerGameObject.GetComponent<IUIManager>();
         mainCamera = Camera.main;
         PerformInitialChecks();
         _meetingRoomsManager.OnRoomSelectionInDropdown.AddListener((room) => StartCoroutine(DisableHoveringForSeconds(5)));
@@ -41,7 +43,7 @@ public class HoverManager : MonoBehaviour
         // Check if the mouse is over UI elements
         if (EventSystem.current.IsPointerOverGameObject())
         {
-            HideHoverUI();
+            HideAllHoverUI();
             return;
         }
 
@@ -56,20 +58,23 @@ public class HoverManager : MonoBehaviour
             {
                 if (hitRoom != currentHoveredRoom)
                 {
+                    Debug.Log("Hovering over room " + hitRoom.RoomNumber);
+                    HideHoverUI(currentHoveredRoom);
                     currentHoveredRoom = hitRoom;
                     ShowHoverUI(hitRoom);
                     FocusCameraOnRoom(hitRoom);
-                    hitRoom.IsFocused = true;
+                    //hitRoom.IsFocused = true;
+                    _meetingRoomsManager.SetFocusedRoom(hitRoom);
                 }
             }
             else
             {
-                HideHoverUI();
+                HideAllHoverUI();
             }
         }
         else
         {
-            HideHoverUI();
+            HideAllHoverUI();
         }
     }
 
@@ -87,27 +92,32 @@ public class HoverManager : MonoBehaviour
 
     void ShowHoverUI(MeetingRoom room)
     {
-        if (_uiManager != null)
+        if (_uiManagerGameObject != null)
         {
             _uiManager.ShowHoverUI(room);
         }
     }
 
-    void HideHoverUI()
+    void HideAllHoverUI()
     {
-        if (currentHoveredRoom != null)
+        foreach (var room in _meetingRoomsManager.meetingRoomsInScene)
         {
-            currentHoveredRoom = null;
-            if (_uiManager != null)
-            {
-                _uiManager.HideHoverUI();
-            }
+            HideHoverUI(room);
+        }
+        currentHoveredRoom = null;
+    }
+
+    private void HideHoverUI(MeetingRoom room)
+    {
+        if (_uiManagerGameObject != null)
+        {
+            _uiManager.HideHoverUI(room);
         }
     }
 
     private void PerformInitialChecks()
     {
-        if (_uiManager == null)
+        if (_uiManagerGameObject == null)
         {
             Debug.LogError("UIManager reference is missing in HoverManager!");
         }

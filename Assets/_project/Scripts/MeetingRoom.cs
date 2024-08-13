@@ -29,6 +29,7 @@ public class MeetingRoom : MonoBehaviour
     /// <returns>The average number of meetings per day</returns>
     private float GetAverageMeetingsPerDay()
     {
+        Debug.Log($"Calculating average meetings per day for room {RoomNumber} between {DateStartFilter} and {DateEndFilter}.");
         if (StartTimes == null || StartTimes.Count == 0)
         {
             return 0;
@@ -45,6 +46,8 @@ public class MeetingRoom : MonoBehaviour
             .GroupBy(startTime => startTime.Value.Date)
             .Select(group => new { Date = group.Key, Occurrences = group.Count() })
             .Average(group => group.Occurrences);
+
+        Debug.Log($"Room {RoomNumber} has {occurrencesPerDay} occurrences per day between {DateStartFilter} and {DateEndFilter}.");
 
         float parsedOccurrencesPerDay = float.Parse(occurrencesPerDay.ToString());
         return parsedOccurrencesPerDay;

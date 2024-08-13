@@ -87,7 +87,7 @@ public class MeetingRoomsManager : MonoBehaviour
         //UpdateAllRoomVisualsAsUnfocused();
     }
 
-    private void SetFocusedRoom(VisualMeetingRoom room)
+    public void SetFocusedRoom(VisualMeetingRoom room)
     {
         foreach (VisualMeetingRoom r in meetingRoomsInScene)
         {
