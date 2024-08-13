@@ -60,7 +60,6 @@ public class VisualMeetingRoom : MeetingRoom, IMeetingRoomVisualsHandler
             Debug.LogError("No focused material found!");
             return;
         }
-        //_meetingRoom = this;
         MeshRenderer mr;
         if (TryGetComponent<MeshRenderer>(out mr))
         {
@@ -84,7 +83,6 @@ public class VisualMeetingRoom : MeetingRoom, IMeetingRoomVisualsHandler
         {
             mr.material = _unFocusedMaterial;
         }
-        //_meetingRoom = GetComponent<MeetingRoom>();
     }
 
     public void SetNumberOfMeetingsVisuals()

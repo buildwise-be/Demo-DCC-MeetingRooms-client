@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-public class UIManager : MonoBehaviour
+public class UIManager : MonoBehaviour, IUIManager
 {
     [SerializeField]
     private RectTransform _hoverUI;
@@ -51,5 +51,10 @@ public class UIManager : MonoBehaviour
         transform.position = new Vector3(center.x, center.y + 2*verticalExtents, center.z);
         _hoverUI.transform.LookAt(Camera.main.transform);
         _hoverUI.transform.Rotate(0f, 180f, 0f);
+    }
+
+    public void HideHoverUI(MeetingRoom room)
+    {
+        HideHoverUI();
     }
 }
