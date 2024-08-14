@@ -87,12 +87,6 @@ public class DatabaseConnector : MonoBehaviour
                 meetingRoomData.Add(roomData);
             }
         }
-        /*
-        foreach (MeetingRoomData data in meetingRoomData)
-        {
-            Debug.Log($"Room {data.RoomNumber} has {data.StartTimes.Count} meetings");
-        }
-        */
         OnMeetingRoomsDataUpdated.Invoke(meetingRoomData);
     }
 }

@@ -111,7 +111,6 @@ public class HoverManager : MonoBehaviour
                 yield break;
             }
         }
-        Debug.Log("Exiting coroutine");
     }
 
     private IEnumerator DisableHoveringForSeconds(float duration)

@@ -105,12 +105,6 @@ public class VisualMeetingRoom : MeetingRoom, IMeetingRoomVisualsHandler
         }
         else
         {
-            if (RoomNumber == 1)
-            {
-                Debug.Log($"Room 1:");
-                Debug.Log("AverageMeetingsPerDay: " + AverageMeetingsPerDay + " MaxFilteredMeetingsPerDay: " + _meetingRoomsManager.MaxFilteredMeetingsPerDay);
-                Debug.Log($"Lerp ratio: {AverageMeetingsPerDay / _meetingRoomsManager.MaxFilteredMeetingsPerDay}");
-            }
             c = Color.Lerp(
                 Color.green,
                 Color.red,

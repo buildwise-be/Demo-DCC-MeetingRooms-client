@@ -176,7 +176,6 @@ public class MeetingRoomsManager : MonoBehaviour
 
     public void SetAverageMeetingsVisuals()
     {
-        Debug.Log("======= CALLING SetAverageMeetingsVisuals =======");
         foreach (VisualMeetingRoom visualMeetingRoom in meetingRoomsInScene)
         {
             if (visualMeetingRoom.RoomNumber == 0)

@@ -55,21 +55,6 @@ public class MeetingRoom : MonoBehaviour
         int numberOfDays = (_dateEndFilter - _dateStartFilter).Days + 1;
         float averageMeetingsPerDay = (float)numberOfMeetings / (float)numberOfDays;
 
-        if (RoomNumber == 1)
-        {
-            Debug.Log($"Room 1:");
-            Debug.Log($"\tAverage meetings per day: {averageMeetingsPerDay}");
-            Debug.Log($"\tFiltered start date: {_dateStartFilter.ToShortDateString()}");
-            Debug.Log($"\tFiltered end date: {_dateEndFilter.ToShortDateString()}");
-        }
-        else if (RoomNumber == 2)
-        {
-            Debug.Log($"Room 2:");
-            Debug.Log($"\tAverage meetings per day: {averageMeetingsPerDay}");
-            Debug.Log($"\tFiltered start date: {_dateStartFilter.ToShortDateString()}");
-            Debug.Log($"\tFiltered end date: {_dateEndFilter.ToShortDateString()}");
-        }
-
         float parsedOccurrencesPerDay = float.Parse(averageMeetingsPerDay.ToString());
         return parsedOccurrencesPerDay;
     }
