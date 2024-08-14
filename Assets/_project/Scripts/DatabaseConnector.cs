@@ -7,11 +7,10 @@ using UnityEngine.Events;
 
 public class DatabaseConnector : MonoBehaviour
 {
-    private List<float> _roomOccupancies;
-    private List<float> _meetingsPerDay;
-
     [SerializeField]
     private MeetingRoomsManager _meetingRoomsManager;
+    [SerializeField]
+    private SlidingUIManager _slidingUIManager;
 
     [HideInInspector]
     public UnityEvent<List<float>> OnRoomOccupanciesUpdated;
@@ -27,8 +26,9 @@ public class DatabaseConnector : MonoBehaviour
         OnRoomOccupanciesUpdated = new UnityEvent<List<float>>();
         OnMeetingsPerDayUpdated = new UnityEvent<List<float>>();
         OnMeetingRoomsDataUpdated = new UnityEvent<List<MeetingRoomData>>();
-        _roomOccupancies = new List<float>();
-        _meetingsPerDay = new List<float>();
+        OnMeetingRoomsDataUpdated.AddListener(_slidingUIManager.DatesSlider.Setup);
+        OnMeetingRoomsDataUpdated.AddListener(_meetingRoomsManager.UpdateMinMaxDatesFromRoomData);
+        OnMeetingRoomsDataUpdated.AddListener(_meetingRoomsManager.InitializeDateFilters);
     }
 
     private void Start()
@@ -39,7 +39,6 @@ public class DatabaseConnector : MonoBehaviour
     private async void FetchMeetingRoomData()
     {
         Debug.Log("Fetching meeting room data...");
-        _roomOccupancies.Clear();
 
         // Construct a new TableClient using a connection string.
         Config config = ConfigManager.LoadConfig();
@@ -88,12 +87,12 @@ public class DatabaseConnector : MonoBehaviour
                 meetingRoomData.Add(roomData);
             }
         }
-
+        /*
         foreach (MeetingRoomData data in meetingRoomData)
         {
             Debug.Log($"Room {data.RoomNumber} has {data.StartTimes.Count} meetings");
         }
-
+        */
         OnMeetingRoomsDataUpdated.Invoke(meetingRoomData);
     }
 }

@@ -10,43 +10,72 @@ public class MeetingRoomsManager : MonoBehaviour
     [HideInInspector]
     public List<VisualMeetingRoom> meetingRoomsInScene;
 
-    [SerializeField] private TMP_Dropdown _roomsDropdown;
-    [SerializeField] private GameObject _meetingRoomsCenter;
-    [SerializeField] private DatabaseConnector _databaseConnector;
+    [SerializeField]
+    private TMP_Dropdown _roomsDropdown;
 
-    [SerializeField] private GameObject _meetingRoomCenterGO;
+    [SerializeField]
+    private GameObject _meetingRoomsCenter;
+
+    [SerializeField]
+    private DatabaseConnector _databaseConnector;
+
+    [SerializeField]
+    private GameObject _meetingRoomCenterGO;
 
     [HideInInspector]
     public UnityEvent<VisualMeetingRoom> OnRoomSelectionInDropdown;
+
     [HideInInspector]
     public UnityEvent OnMeetingRoomsObtained;
 
-    public float MaxMeetingsPerDay
+    private DateTime _filteredStartDate;
+    private DateTime _filteredEndDate;
+
+    private DateTime _minDate;
+    private DateTime _maxDate;
+
+    /// <summary>
+    /// The minimum date chosen in the UI to filter the data shown.
+    /// </summary>
+    public DateTime FilteredStartDate
     {
-        get
+        get { return _filteredStartDate; }
+        private set { _filteredStartDate = value; }
+    }
+
+    /// <summary>
+    /// The maximum date chosen in the UI to filter the data shown.
+    /// </summary>
+    public DateTime FilteredEndDate
+    {
+        get { return _filteredEndDate; }
+        private set { _filteredEndDate = value; }
+    }
+
+    public float MaxFilteredMeetingsPerDay
+    {
+        get 
         {
-            return meetingRoomsInScene.Max(room => room.MeetingsPerDay);
+            return meetingRoomsInScene.Max(room => room.AverageMeetingsPerDay); 
         }
     }
 
-
     private int _currentlySelectedRoomDropDownIndex = -1;
-    public int CurrentlySelectedRoomDropDownIndex 
+    public int CurrentlySelectedRoomDropDownIndex
     {
-        get
-        {
-            return _currentlySelectedRoomDropDownIndex;
-        }
-        set 
+        get { return _currentlySelectedRoomDropDownIndex; }
+        set
         {
             _currentlySelectedRoomDropDownIndex = value;
-            VisualMeetingRoom mr = meetingRoomsInScene.Where((room) => room.RoomNumber == (_currentlySelectedRoomDropDownIndex)).FirstOrDefault();
+            VisualMeetingRoom mr = meetingRoomsInScene
+                .Where((room) => room.RoomNumber == (_currentlySelectedRoomDropDownIndex))
+                .FirstOrDefault();
             OnRoomSelectionInDropdown.Invoke(mr);
         }
     }
-    
-    
+
     private Transform _centerOfAllMeetingRooms;
+
     /// <summary>
     /// The Transform of the center of all meeting rooms, in world space.
     /// </summary>
@@ -84,7 +113,6 @@ public class MeetingRoomsManager : MonoBehaviour
         OnMeetingRoomsObtained.Invoke();
         PopulateRoomsDropDown();
         PositionMeetingRoomsCenter();
-        //UpdateAllRoomVisualsAsUnfocused();
     }
 
     public void SetFocusedRoom(VisualMeetingRoom room)
@@ -148,9 +176,41 @@ public class MeetingRoomsManager : MonoBehaviour
 
     public void SetAverageMeetingsVisuals()
     {
+        Debug.Log("======= CALLING SetAverageMeetingsVisuals =======");
         foreach (VisualMeetingRoom visualMeetingRoom in meetingRoomsInScene)
         {
+            if (visualMeetingRoom.RoomNumber == 0)
+            {
+                continue;
+            }
             visualMeetingRoom.CurrentDataTypeShown = RoomDataTypes.MeetingsPerDay;
+        }
+    }
+
+    public void UpdateMinMaxDatesFromRoomData(List<MeetingRoomData> roomData)
+    {
+        IEnumerable<DateTime> allStartTimes = roomData
+            .SelectMany(data => data.StartTimes)
+            .Where(startTime => startTime.HasValue)
+            .Select(startTime => startTime.Value.DateTime);
+        _minDate = allStartTimes.Min();
+        _maxDate = allStartTimes.Max();
+    }
+
+    public void InitializeDateFilters(List<MeetingRoomData> roomData)
+    {
+        UpdateMinMaxDatesFromRoomData(roomData);
+        FilteredStartDate = _minDate;
+        FilteredEndDate = _maxDate;
+    }
+
+    public void UpdateStartEndDateFilters(float startValue, float endValue)
+    {
+        FilteredStartDate = _minDate.AddDays(startValue);
+        FilteredEndDate = _minDate.AddDays(endValue);
+        foreach (VisualMeetingRoom room in meetingRoomsInScene)
+        {
+            room.UpdateNumberOfMeetingsVisuals();
         }
     }
 }

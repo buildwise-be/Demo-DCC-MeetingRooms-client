@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class MeetingRoomData
 {
@@ -18,6 +19,7 @@ public class MeetingRoomData
 
     internal void UpdateMeetingRoomGameObject(MeetingRoom mr_go)
     {
+        Debug.Log("Updating MeetingRoom. StartTimes: " + StartTimes.Count + ", Organizers: " + Organizers.Count + ", Titles: " + Titles.Count);
         mr_go.StartTimes = StartTimes;
         mr_go.Organizers = Organizers;
         mr_go.Titles = Titles;
