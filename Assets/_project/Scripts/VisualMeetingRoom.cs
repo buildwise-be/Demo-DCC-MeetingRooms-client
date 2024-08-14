@@ -7,8 +7,6 @@ public class VisualMeetingRoom : MeetingRoom, IMeetingRoomVisualsHandler
     private Material _unFocusedMaterial;
     private Material _occupancyMaterial;
 
-    private MeetingRoomsManager _meetingRoomsManager;
-
     private bool _isFocused = false;
     public bool IsFocused
     {
@@ -36,7 +34,7 @@ public class VisualMeetingRoom : MeetingRoom, IMeetingRoomVisualsHandler
             _currentDataTypeShown = value;
             if (_currentDataTypeShown == RoomDataTypes.MeetingsPerDay)
             {
-                SetNumberOfMeetingsVisuals();
+                UpdateNumberOfMeetingsVisuals();
             }
         }
     }
@@ -85,29 +83,38 @@ public class VisualMeetingRoom : MeetingRoom, IMeetingRoomVisualsHandler
         }
     }
 
-    public void SetNumberOfMeetingsVisuals()
+    public void UpdateNumberOfMeetingsVisuals()
     {
+        if (RoomNumber == 0)
+        {
+            return;
+        }
         if (_occupancyMaterial == null)
         {
             Debug.LogWarning("No occupancy material found!");
             return;
         }
-        //_meetingRoom = GetComponent<MeetingRoom>();
         var _meshRenderer = GetComponent<MeshRenderer>();
         _meshRenderer.material = _occupancyMaterial;
 
         Color c;
-        if (MeetingsPerDay == 0)
+        if (AverageMeetingsPerDay == 0)
         {
             Debug.LogWarning("No data fetched for room occupancy");
             c = Color.grey;
         }
         else
         {
+            if (RoomNumber == 1)
+            {
+                Debug.Log($"Room 1:");
+                Debug.Log("AverageMeetingsPerDay: " + AverageMeetingsPerDay + " MaxFilteredMeetingsPerDay: " + _meetingRoomsManager.MaxFilteredMeetingsPerDay);
+                Debug.Log($"Lerp ratio: {AverageMeetingsPerDay / _meetingRoomsManager.MaxFilteredMeetingsPerDay}");
+            }
             c = Color.Lerp(
                 Color.green,
                 Color.red,
-                MeetingsPerDay / _meetingRoomsManager.MaxMeetingsPerDay
+                AverageMeetingsPerDay / _meetingRoomsManager.MaxFilteredMeetingsPerDay
             );
         }
         Color transparentC = new Color(c.r, c.g, c.b, 0.3f);

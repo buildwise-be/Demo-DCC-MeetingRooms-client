@@ -9,6 +9,13 @@ public class HoverManager : MonoBehaviour
     public float raycastDistance = 100f; // Max distance for raycast
 
     [SerializeField]
+    [Tooltip("Delay in seconds before reanabling hover after a room dropdown selection.")]
+    private float _hoverUIReenableDelay = 3f;
+    [SerializeField]
+    [Tooltip("Required time in seconds to detect a room as being hovered.")]
+    private float _hoveringRequiredTime = 1.0f;
+
+    [SerializeField]
     private GameObject _uiManagerGameObject;
     private IUIManager _uiManager;
     [SerializeField]
@@ -19,6 +26,8 @@ public class HoverManager : MonoBehaviour
     private Camera mainCamera;
     private VisualMeetingRoom currentHoveredRoom;
 
+    private bool _isHoveringInProgress = false;
+
     public bool IsHoveringEnabled { get; private set; } = true;
 
     void Start()
@@ -26,56 +35,83 @@ public class HoverManager : MonoBehaviour
         _uiManager = _uiManagerGameObject.GetComponent<IUIManager>();
         mainCamera = Camera.main;
         PerformInitialChecks();
-        _meetingRoomsManager.OnRoomSelectionInDropdown.AddListener((room) => StartCoroutine(DisableHoveringForSeconds(5)));
+        _meetingRoomsManager.OnRoomSelectionInDropdown.AddListener((room) => StartCoroutine(DisableHoveringForSeconds(_hoverUIReenableDelay)));
     }
 
     void Update()
     {
-        CheckForHovering();
+        if (!_isHoveringInProgress && IsHoveringEnabled)
+        {
+            StartCoroutine(CheckForHoveringCoroutine());
+        }
     }
 
-    private void CheckForHovering()
+    private IEnumerator CheckForHoveringCoroutine()
     {
-        if (!IsHoveringEnabled)
-        {
-            return;
-        }
+        _isHoveringInProgress = true;
+        bool hoveringConfirmed = false;
+        float _hoveringProgressDuration = 0.0f;
+
         // Check if the mouse is over UI elements
         if (EventSystem.current.IsPointerOverGameObject())
         {
             HideAllHoverUI();
-            return;
+            _isHoveringInProgress = false;
+            yield break;
         }
 
-        // Perform raycast from mouse position
-        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit, raycastDistance, meetingRoomLayer))
+        int count = 0;
+        while (!hoveringConfirmed)
         {
-            VisualMeetingRoom hitRoom = hit.collider.GetComponent<VisualMeetingRoom>();
-            if (hitRoom != null)
+            // Perform raycast from mouse position
+            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit, raycastDistance, meetingRoomLayer))
             {
-                if (hitRoom != currentHoveredRoom)
+                VisualMeetingRoom hitRoom = hit.collider.GetComponent<VisualMeetingRoom>();
+                if (hitRoom != null)
                 {
-                    Debug.Log("Hovering over room " + hitRoom.RoomNumber);
-                    HideHoverUI(currentHoveredRoom);
-                    currentHoveredRoom = hitRoom;
-                    ShowHoverUI(hitRoom);
-                    FocusCameraOnRoom(hitRoom);
-                    //hitRoom.IsFocused = true;
-                    _meetingRoomsManager.SetFocusedRoom(hitRoom);
+                    if (hitRoom != currentHoveredRoom)
+                    {
+                        _hoveringProgressDuration += Time.deltaTime;
+                        if (_hoveringProgressDuration > _hoveringRequiredTime)
+                        {
+                            hoveringConfirmed = true;
+                            HideHoverUI(currentHoveredRoom);
+                            currentHoveredRoom = hitRoom;
+                            ShowHoverUI(hitRoom);
+                            FocusCameraOnRoom(hitRoom);
+                            _meetingRoomsManager.SetFocusedRoom(hitRoom);
+                            _isHoveringInProgress = false;
+                        }
+                        yield return null;
+                    }
+                    else
+                    {
+                        _isHoveringInProgress = false;
+                        yield break;
+                    }
+                }
+                else
+                {
+                    _isHoveringInProgress = false;
+                    yield break;
                 }
             }
             else
             {
-                HideAllHoverUI();
+                _isHoveringInProgress = false;
+                yield break;
+            }
+            count++;
+            if (count > 5000)
+            {
+                Debug.LogError("Infinite loop detected in CheckForHoveringCoroutine!");
+                yield break;
             }
         }
-        else
-        {
-            HideAllHoverUI();
-        }
+        Debug.Log("Exiting coroutine");
     }
 
     private IEnumerator DisableHoveringForSeconds(float duration)
